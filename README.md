@@ -1,10 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Accounts Card
 
-## Available Scripts
+## Pain
 
-In the project directory, you can run:
+I have a lot of accounts, LinkedIn, Twitter, Github and so on. Companies ask for my LinkedIn and Github. Friends ask for my Twitter and Instagram. When I want to share one of these accounts, I have to go to the specific site, find the URL and copy & paste it.
 
-### `npm start`
+## Solution
+
+I would like to have a shareable digital contact card I can send to people. It has only links to accounts, no unnecessary information. And it is customizable to the recipient.
+
+## Unique Selling Point
+
+The USP is the feature to create custom cards, e.g. one card shows the links to LinkedIn and Github (for a company), another card shows the links to Twitter and Instagram (for a friend). Both, the company and the friend, can only see the links I want them to see.
+
+## MVP
+
+1. I copy all my account links into the app.
+2. I can create customized shareable cards, that only show the account links I want the recipient to see.
+
+## Validation
+
+There are some apps for digital business cards. They seem to be crammed with a lot of information. There is also [@Booligoosh's](https://twitter.com/Booligoosh) maker.rock, that speaks to a specific audience and doesn't have the customization feature.
+
+## Monetization
+
+Max limit of accounts to show on a card. Add custom accounts for specific sites. Subscribe to store your accounts, so you don't have to input your accounts all the time.
+
+---
+
+## Start the app: `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -12,33 +35,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test`
+## Test the app: `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Build the app: `npm run build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
