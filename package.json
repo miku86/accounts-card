@@ -17,12 +17,22 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "CI=false react-scripts build",
+    "test:unit": "react-scripts test",
+    "test:unit:coverage": "react-scripts test --watchAll=false --coverage --forceExit",
+    "test:e2e:cli": "cypress run",
+    "test:e2e:gui": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/index.{ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/**/serviceWorker.ts"
+    ]
   },
   "browserslist": {
     "production": [
