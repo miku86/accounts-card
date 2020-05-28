@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { App } from "../App";
+import { AccountsList } from "../AccountsList";
 
-describe("App", () => {
+describe("AccountsList", () => {
   it("should render", () => {
-    const { container } = render(<App />);
+    const { container } = render(<AccountsList />);
     expect(container).toBeTruthy();
   });
 });
