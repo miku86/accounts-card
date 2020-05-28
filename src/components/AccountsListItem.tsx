@@ -2,8 +2,7 @@ import { TextField } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { GitHub } from "@material-ui/icons";
-import React from "react";
+import React, { createElement } from "react";
 import { Platform } from "../utils/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,9 +24,7 @@ export const AccountsListItem = ({ platform }: Props) => {
 
   return (
     <ListItem className={classes.listItem}>
-      <ListItemIcon>
-        <GitHub />
-      </ListItemIcon>
+      <ListItemIcon>{createElement(platform.icon)}</ListItemIcon>
       <TextField
         id={platform.id}
         label={platform.text}

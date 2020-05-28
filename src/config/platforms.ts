@@ -1,60 +1,73 @@
+import {
+  Facebook,
+  GitHub,
+  Home,
+  Instagram,
+  LinkedIn,
+  Mail,
+  Pinterest,
+  Reddit,
+  Telegram,
+  Twitter,
+  YouTube,
+} from "@material-ui/icons";
 import { Platform, Text } from "../utils/types";
 
 const platforms = [
   {
     placeholder: "https://",
     text: "Homepage",
-    icon: "Home",
+    icon: Home,
   },
   {
     placeholder: "sandy@super.com",
     text: "E-Mail",
-    icon: "Mail",
+    icon: Mail,
   },
   {
     placeholder: "https://twitter.com/",
     text: "Twitter",
-    icon: "Twitter",
+    icon: Twitter,
   },
   {
     placeholder: "https://www.linkedin.com/in/",
     text: "LinkedIn",
-    icon: "LinkedIn",
+    icon: LinkedIn,
   },
   {
     placeholder: "https://www.youtube.com/channel/",
     text: "YouTube",
-    icon: "YouTube",
+    icon: YouTube,
   },
   {
     placeholder: "https://www.facebook.com/",
     text: "Facebook",
-    icon: "Facebook",
+    icon: Facebook,
   },
   {
     placeholder: "https://www.instagram.com/",
     text: "Instagram",
-    icon: "Instagram",
+    icon: Instagram,
   },
   {
     placeholder: "https://github.com/",
     text: "Github",
-    icon: "GitHub",
+    icon: GitHub,
   },
   {
     placeholder: "https://www.reddit.com/user/",
     text: "Reddit",
-    icon: "Reddit",
+    icon: Reddit,
   },
   {
     placeholder: "https://www.pinterest.com/",
     text: "Pinterest",
-    icon: "Pinterest",
+    icon: Pinterest,
   },
   {
     placeholder: "https://telegram.me/",
     text: "Telegram",
-    icon: "Telegram",
+    icon: Telegram,
   },
   { placeholder: "", text: "Snapchat", icon: "" },
   { placeholder: "", text: "TikTok", icon: "" },
@@ -85,7 +98,7 @@ const platforms = [
 ];
 
 const getPlatformsWithIcon = (platforms: Platform[]) =>
-  platforms.filter((platform) => platform.icon.length > 0);
+  platforms.filter((platform) => typeof platform.icon === "object");
 
 const generateId = (text: Text) => text.trim().replace(" ", "-").toLowerCase();
 
