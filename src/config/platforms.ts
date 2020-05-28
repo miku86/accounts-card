@@ -1,45 +1,99 @@
+import { Platform, Text } from "../utils/types";
+
 const platforms = [
-  { text: "Homepage", icon: "Home" },
-  { text: "E-Mail", icon: "Mail" },
-  { text: "YouTube", icon: "YouTube" },
-  { text: "Twitter", icon: "Twitter" },
-  { text: "Facebook", icon: "Facebook" },
-  { text: "Github", icon: "GitHub" },
-  { text: "Reddit", icon: "Reddit" },
-  { text: "Pinterest", icon: "Pinterest" },
-  { text: "Instagram", icon: "Instagram" },
-  { text: "LinkedIn", icon: "LinkedIn" },
-  { text: "Telegram", icon: "Telegram" },
-  { text: "Whatsapp", icon: "WhatsApp" },
-  { text: "Snapchat", icon: "" },
-  { text: "TikTok", icon: "" },
-  { text: "VK", icon: "" },
-  { text: "Tumblr", icon: "" },
-  { text: "Viber", icon: "" },
-  { text: "Signal", icon: "" },
-  { text: "Line", icon: "" },
-  { text: "Medium", icon: "" },
-  { text: "Patreon", icon: "" },
-  { text: "WIP", icon: "" },
-  { text: "Makerlog", icon: "" },
-  { text: "Buy Me A Coffee", icon: "" },
-  { text: "Ko-Fi", icon: "" },
-  { text: "dev.to", icon: "" },
-  { text: "Stack Overflow", icon: "" },
-  { text: "WeChat", icon: "" },
-  { text: "QQ", icon: "" },
-  { text: "Sina Weibo", icon: "" },
-  { text: "Baidu Tieba", icon: "" },
-  { text: "Hacker News", icon: "" },
-  { text: "Wikipedia", icon: "" },
-  { text: "Ebay", icon: "" },
-  { text: "Quora", icon: "" },
-  { text: "Spotify", icon: "" },
-  { text: "Gitlab", icon: "" },
-  { text: "Steam", icon: "" },
+  {
+    placeholder: "https://",
+    text: "Homepage",
+    icon: "Home",
+  },
+  {
+    placeholder: "sandy@super.com",
+    text: "E-Mail",
+    icon: "Mail",
+  },
+  {
+    placeholder: "https://twitter.com/",
+    text: "Twitter",
+    icon: "Twitter",
+  },
+  {
+    placeholder: "https://www.linkedin.com/in/",
+    text: "LinkedIn",
+    icon: "LinkedIn",
+  },
+  {
+    placeholder: "https://www.youtube.com/channel/",
+    text: "YouTube",
+    icon: "YouTube",
+  },
+  {
+    placeholder: "https://www.facebook.com/",
+    text: "Facebook",
+    icon: "Facebook",
+  },
+  {
+    placeholder: "https://www.instagram.com/",
+    text: "Instagram",
+    icon: "Instagram",
+  },
+  {
+    placeholder: "https://github.com/",
+    text: "Github",
+    icon: "GitHub",
+  },
+  {
+    placeholder: "https://www.reddit.com/user/",
+    text: "Reddit",
+    icon: "Reddit",
+  },
+  {
+    placeholder: "https://www.pinterest.com/",
+    text: "Pinterest",
+    icon: "Pinterest",
+  },
+  {
+    placeholder: "https://telegram.me/",
+    text: "Telegram",
+    icon: "Telegram",
+  },
+  { placeholder: "", text: "Snapchat", icon: "" },
+  { placeholder: "", text: "TikTok", icon: "" },
+  { placeholder: "", text: "VK", icon: "" },
+  { placeholder: "", text: "Tumblr", icon: "" },
+  { placeholder: "", text: "Viber", icon: "" },
+  { placeholder: "", text: "Signal", icon: "" },
+  { placeholder: "", text: "Line", icon: "" },
+  { placeholder: "", text: "Medium", icon: "" },
+  { placeholder: "", text: "Patreon", icon: "" },
+  { placeholder: "", text: "WIP", icon: "" },
+  { placeholder: "", text: "Makerlog", icon: "" },
+  { placeholder: "", text: "Buy Me A Coffee", icon: "" },
+  { placeholder: "", text: "Ko-Fi", icon: "" },
+  { placeholder: "", text: "dev.to", icon: "" },
+  { placeholder: "", text: "Stack Overflow", icon: "" },
+  { placeholder: "", text: "WeChat", icon: "" },
+  { placeholder: "", text: "QQ", icon: "" },
+  { placeholder: "", text: "Sina Weibo", icon: "" },
+  { placeholder: "", text: "Baidu Tieba", icon: "" },
+  { placeholder: "", text: "Hacker News", icon: "" },
+  { placeholder: "", text: "Wikipedia", icon: "" },
+  { placeholder: "", text: "Ebay", icon: "" },
+  { placeholder: "", text: "Quora", icon: "" },
+  { placeholder: "", text: "Spotify", icon: "" },
+  { placeholder: "", text: "Gitlab", icon: "" },
+  { placeholder: "", text: "Steam", icon: "" },
 ];
 
-const platformsWithIcon = () =>
+const getPlatformsWithIcon = (platforms: Platform[]) =>
   platforms.filter((platform) => platform.icon.length > 0);
 
-export const getPlatforms = platformsWithIcon;
+const generateId = (text: Text) => text.trim().replace(" ", "-").toLowerCase();
+
+const addIdToPlatforms = (platforms: Platform[]) =>
+  platforms.map((platform) => ({
+    ...platform,
+    id: generateId(platform.text),
+  }));
+
+export const getPlatforms = () =>
+  addIdToPlatforms(getPlatformsWithIcon(platforms));
