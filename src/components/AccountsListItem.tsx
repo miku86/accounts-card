@@ -29,6 +29,7 @@ export const AccountsListItem = ({ platform, handleChange }: Props) => {
       <TextField
         id={platform.id}
         label={platform.text}
+        name={platform.text}
         placeholder={platform.placeholder}
         variant="filled"
         size="small"

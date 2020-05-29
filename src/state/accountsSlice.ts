@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Account } from "../utils/types";
+import { Account, Name } from "../utils/types";
 
 export const accountsSlice = createSlice({
   name: "accounts",
@@ -7,15 +7,31 @@ export const accountsSlice = createSlice({
     items: [] as Account[],
   },
   reducers: {
-    editAccount: (state, action: PayloadAction<Account>) => {
+    editAccountText: (state, action: PayloadAction<Account>) => {
       const withoutNewAccount = state.items.filter(
         (state) => state.name !== action.payload.name
       );
       state.items = [...withoutNewAccount, action.payload];
     },
+    toggleAccountVisibility: (state, action: PayloadAction<Name>) => {
+      state.items = state.items.map((account: Account) => {
+        if (account.id === action.payload) {
+          return {
+            ...account,
+            show: !account.show,
+          };
+        }
+
+        return account;
+      });
+      console.log(action.payload);
+    },
   },
 });
 
-export const { editAccount } = accountsSlice.actions;
+export const {
+  editAccountText,
+  toggleAccountVisibility,
+} = accountsSlice.actions;
 
 export default accountsSlice.reducer;

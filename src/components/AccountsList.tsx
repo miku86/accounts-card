@@ -3,7 +3,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import React, { ChangeEvent } from "react";
 import { connect } from "react-redux";
 import { getPlatforms } from "../config/platforms";
-import { editAccount } from "../state/accountsSlice";
+import { editAccountText } from "../state/accountsSlice";
 import { Account } from "../utils/types";
 import AccountsListItem from "./AccountsListItem";
 
@@ -14,19 +14,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  editAccount: (newAccount: Account) => void;
+  editAccountText: (newAccount: Account) => void;
 }
 
-export const AccountsList = ({ editAccount }: Props) => {
+export const AccountsList = ({ editAccountText }: Props) => {
   const classes = useStyles();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newAccount = {
-      name: event.currentTarget.id,
+      name: event.currentTarget.name,
+      id: event.currentTarget.id,
       url: event.currentTarget.value,
+      show: false,
     };
 
-    editAccount(newAccount);
+    editAccountText(newAccount);
   };
 
   return (
@@ -43,7 +45,7 @@ export const AccountsList = ({ editAccount }: Props) => {
 };
 
 const mapDispatchToProps = {
-  editAccount,
+  editAccountText,
 };
 
 export default connect(null, mapDispatchToProps)(AccountsList);

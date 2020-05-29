@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import AccountsList from "./AccountsList";
+import CreateCard from "./CreateCard";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -34,6 +35,7 @@ export const App = (props: Props) => {
         Create Card
       </Button>
 
+      <CreateCard open={open} handleClose={handleClose} />
       <AccountsList />
     </div>
   );
