@@ -15,8 +15,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { toggleAccountVisibility } from "../state/accountsSlice";
-import { Account, AppState, Name } from "../utils/types";
+import { createCard, toggleAccountVisibility } from "../state/accountsSlice";
+import { Account, AppState, Card, Name } from "../utils/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
   list: {
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   accounts?: Account[];
   open: boolean;
+  createCard: (card: Card) => void;
   handleClose: () => void;
   toggleAccountVisibility: (name: Name) => void;
 }
@@ -41,6 +42,7 @@ interface Props {
 export const CreateCard = ({
   accounts,
   open,
+  createCard,
   handleClose,
   toggleAccountVisibility,
 }: Props) => {
@@ -48,6 +50,22 @@ export const CreateCard = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     toggleAccountVisibility(event.currentTarget.name);
+  };
+
+  const handleSubmit = () => {
+    const accountsToShow = accounts
+      ? accounts.filter((account) => account.showInCard)
+      : [];
+
+    if (accountsToShow && accountsToShow.length) {
+      const card = {
+        cardId: "1",
+        userId: "1",
+        accounts: accountsToShow,
+      };
+
+      createCard(card);
+    }
   };
 
   return (
@@ -89,7 +107,12 @@ export const CreateCard = ({
         </List>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" color="primary" onClick={handleClose}>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!accounts || !accounts.length}
+          onClick={handleSubmit}
+        >
           Create Card
         </Button>
       </DialogActions>
@@ -102,6 +125,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = {
+  createCard,
   toggleAccountVisibility,
 };
 
