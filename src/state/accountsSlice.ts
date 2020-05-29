@@ -18,7 +18,7 @@ export const accountsSlice = createSlice({
         if (account.id === action.payload) {
           return {
             ...account,
-            show: !account.show,
+            showInCard: !account.showInCard,
           };
         }
 

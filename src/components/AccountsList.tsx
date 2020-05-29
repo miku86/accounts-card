@@ -25,7 +25,7 @@ export const AccountsList = ({ editAccountText }: Props) => {
       name: event.currentTarget.name,
       id: event.currentTarget.id,
       url: event.currentTarget.value,
-      show: false,
+      showInCard: false,
     };
 
     editAccountText(newAccount);

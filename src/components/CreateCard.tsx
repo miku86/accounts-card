@@ -73,7 +73,7 @@ export const CreateCard = ({
               >
                 <ListItemText primary={account.name} secondary={account.url} />
                 <Switch
-                  checked={account.show}
+                  checked={account.showInCard}
                   onChange={handleChange}
                   color="primary"
                   name={account.id}

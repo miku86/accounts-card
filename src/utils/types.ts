@@ -8,7 +8,7 @@ export type Text = string;
 export type Placeholder = string;
 export type HTMLId = string;
 export type Id = string;
-export type Show = boolean;
+export type ShowInCard = boolean;
 
 export interface Card {
   cardId: CardId;
@@ -20,7 +20,7 @@ export interface Account {
   name: Name;
   id: Id;
   url: Url;
-  show: Show;
+  showInCard: ShowInCard;
 }
 
 export interface Platform {
