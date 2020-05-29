@@ -7,6 +7,8 @@ export type Url = string;
 export type Text = string;
 export type Placeholder = string;
 export type HTMLId = string;
+export type Id = string;
+export type Show = boolean;
 
 export interface Card {
   cardId: CardId;
@@ -16,7 +18,9 @@ export interface Card {
 
 export interface Account {
   name: Name;
+  id: Id;
   url: Url;
+  show: Show;
 }
 
 export interface Platform {
@@ -26,10 +30,10 @@ export interface Platform {
   id?: HTMLId;
 }
 
-export interface CardsState {
-  items: Card[];
+export interface AccountsState {
+  items: Account[];
 }
 
 export interface AppState {
-  cards: CardsState;
+  accounts: AccountsState;
 }
