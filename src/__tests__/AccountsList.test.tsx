@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { AccountsList } from "../AccountsList";
+import { AccountsList } from "../components/AccountsList";
 
 describe("AccountsList", () => {
   it("should render", () => {
