@@ -13,7 +13,7 @@ export type ShowInCard = boolean;
 export interface Card {
   cardId: CardId;
   userId?: UserId;
-  accounts: Account[];
+  accounts: Account[] | undefined;
 }
 
 export interface Account {
