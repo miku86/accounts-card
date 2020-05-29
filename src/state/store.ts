@@ -1,10 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import api from "../utils/api";
-import cardsReducer from "./cardsSlice";
+import accountsReducer from "./accountsSlice";
 
 const store = configureStore({
   reducer: {
-    cards: cardsReducer,
+    accounts: accountsReducer,
   },
   middleware: [
     ...getDefaultMiddleware({
