@@ -1,7 +1,9 @@
 import List from "@material-ui/core/List";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
+import { connect } from "react-redux";
 import { getPlatforms } from "../config/platforms";
+import { editAccount } from "../state/accountsSlice";
 import { Account } from "../utils/types";
 import AccountsListItem from "./AccountsListItem";
 
@@ -11,11 +13,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  editAccount: (newAccount: Account) => void;
+}
 
-export const AccountsList = (props: Props) => {
+export const AccountsList = ({ editAccount }: Props) => {
   const classes = useStyles();
-  const [accounts, setAccounts] = useState<Account[] | []>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newAccount = {
@@ -23,12 +26,7 @@ export const AccountsList = (props: Props) => {
       url: event.currentTarget.value,
     };
 
-    setAccounts((prevState: Account[] | []) => {
-      const withoutNewAccount = prevState.filter(
-        (prevAcc) => prevAcc.name !== newAccount.name
-      );
-      return [...withoutNewAccount, newAccount];
-    });
+    editAccount(newAccount);
   };
 
   return (
@@ -44,4 +42,8 @@ export const AccountsList = (props: Props) => {
   );
 };
 
-export default AccountsList;
+const mapDispatchToProps = {
+  editAccount,
+};
+
+export default connect(null, mapDispatchToProps)(AccountsList);
