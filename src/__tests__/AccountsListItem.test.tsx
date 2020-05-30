@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { AccountsListItem } from "../AccountsListItem";
+import { AccountsListItem } from "../components/AccountsListItem";
 
 describe("AccountsListItem", () => {
   it("should display the text of a platform", () => {

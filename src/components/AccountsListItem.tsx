@@ -2,7 +2,7 @@ import { TextField } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import React, { createElement } from "react";
+import React, { ChangeEvent, createElement } from "react";
 import { Platform } from "../utils/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -17,9 +17,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   platform: Platform;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const AccountsListItem = ({ platform }: Props) => {
+export const AccountsListItem = ({ platform, handleChange }: Props) => {
   const classes = useStyles();
 
   return (
@@ -28,9 +29,11 @@ export const AccountsListItem = ({ platform }: Props) => {
       <TextField
         id={platform.id}
         label={platform.text}
+        name={platform.text}
         placeholder={platform.placeholder}
         variant="filled"
         size="small"
+        onChange={handleChange}
       />
     </ListItem>
   );
