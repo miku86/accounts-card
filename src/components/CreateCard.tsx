@@ -3,8 +3,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -13,12 +13,21 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import { FileCopy } from "@material-ui/icons";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import React, { useState } from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createCard, toggleAccountVisibility } from "../state/accountsSlice";
-import { Account, AppState, Card, Name } from "../utils/types";
+import { Account, AppState, CardId, Name } from "../utils/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  content: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   list: {
     minWidth: "400px",
   },
@@ -34,7 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   accounts?: Account[];
   open: boolean;
-  createCard: (card: Card) => void;
+  createCard: any;
+  createdCardId: CardId;
   handleClose: () => void;
   toggleAccountVisibility: (name: Name) => void;
 }
@@ -43,16 +53,18 @@ export const CreateCard = ({
   accounts,
   open,
   createCard,
+  createdCardId,
   handleClose,
   toggleAccountVisibility,
 }: Props) => {
   const classes = useStyles();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     toggleAccountVisibility(event.currentTarget.name);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const accountsToShow = accounts
       ? accounts.filter((account) => account.showInCard)
       : [];
@@ -64,64 +76,93 @@ export const CreateCard = ({
         accounts: accountsToShow,
       };
 
-      createCard(card);
+      await createCard(card);
+
+      setIsSuccess(true);
     }
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="create-card-dialog"
-    >
-      <DialogTitle id="create-card-dialog-title">
-        Control which accounts to share
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Please check your data and control which accounts you want to share.
-        </DialogContentText>
-        <List className={classes.list} dense={true}>
-          {accounts && accounts.length ? (
-            accounts.map((account: Account) => (
-              <ListItem
-                key={account.id}
-                className={classes.listItem}
-                dense={true}
-              >
-                <ListItemText primary={account.name} secondary={account.url} />
-                <Switch
-                  checked={account.showInCard}
-                  onChange={handleChange}
-                  color="primary"
-                  name={account.id}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </ListItem>
-            ))
-          ) : (
-            <Typography variant="body1" align="center" color="error">
-              Please add at least one account.
-            </Typography>
-          )}
-        </List>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={!accounts || !accounts.length}
-          onClick={handleSubmit}
+    <>
+      {isSuccess ? (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="create-card-dialog"
+          fullWidth={true}
         >
-          Create Card
-        </Button>
-      </DialogActions>
-    </Dialog>
+          <DialogContent className={classes.content}>
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              <div>{`https://accounts-card.netlify.app/${createdCardId}`}</div>
+            </Alert>
+            <CopyToClipboard
+              text={`https://accounts-card.netlify.app/${createdCardId}`}
+            >
+              <IconButton aria-label="copy">
+                <FileCopy />
+              </IconButton>
+            </CopyToClipboard>
+          </DialogContent>
+          <DialogActions />
+        </Dialog>
+      ) : (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="create-card-dialog"
+        >
+          <DialogTitle id="create-card-dialog-title">
+            Control which accounts to share
+          </DialogTitle>
+          <DialogContent>
+            <List className={classes.list} dense={true}>
+              {accounts && accounts.length ? (
+                accounts.map((account: Account) => (
+                  <ListItem
+                    key={account.id}
+                    className={classes.listItem}
+                    dense={true}
+                  >
+                    <ListItemText
+                      primary={account.name}
+                      secondary={account.url}
+                    />
+                    <Switch
+                      checked={account.showInCard}
+                      onChange={handleChange}
+                      color="primary"
+                      name={account.id}
+                      inputProps={{ "aria-label": "primary checkbox" }}
+                    />
+                  </ListItem>
+                ))
+              ) : (
+                <Typography variant="body1" align="center" color="error">
+                  Please add at least one account.
+                </Typography>
+              )}
+            </List>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={!accounts || !accounts.length}
+              onClick={handleSubmit}
+            >
+              Create Card
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </>
   );
 };
 
 const mapStateToProps = (state: AppState) => ({
   accounts: state.accounts.items,
+  createdCardId: state.accounts.createdCardId,
 });
 
 const mapDispatchToProps = {

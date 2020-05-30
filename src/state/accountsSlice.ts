@@ -44,11 +44,11 @@ export const createCard = (card: Card) => (
   _: any,
   api: any
 ) => {
-  api
+  return api
     .createCard(card)
     .then((createdCardId: CardId) => {
-      console.log(createdCardId);
       dispatch(storeCreatedCardId(createdCardId));
+      return createdCardId;
     })
     .catch((error: any) => {
       console.error("Error creating card: ", error);
