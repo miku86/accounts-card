@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Account, Card, Name } from "../utils/types";
+import { Account, Card, CardId, Name } from "../utils/types";
 import { AppDispatch } from "./store";
 
 export const accountsSlice = createSlice({
   name: "accounts",
   initialState: {
     items: [] as Account[],
+    createdCardId: (null as unknown) as CardId,
   },
   reducers: {
     editAccountText: (state, action: PayloadAction<Account>) => {
@@ -13,6 +14,9 @@ export const accountsSlice = createSlice({
         (state) => state.name !== action.payload.name
       );
       state.items = [...withoutNewAccount, action.payload];
+    },
+    storeCreatedCardId: (state, action: PayloadAction<CardId>) => {
+      state.createdCardId = action.payload;
     },
     toggleAccountVisibility: (state, action: PayloadAction<Name>) => {
       state.items = state.items.map((account: Account) => {
@@ -31,6 +35,7 @@ export const accountsSlice = createSlice({
 
 export const {
   editAccountText,
+  storeCreatedCardId,
   toggleAccountVisibility,
 } = accountsSlice.actions;
 
@@ -41,8 +46,9 @@ export const createCard = (card: Card) => (
 ) => {
   api
     .createCard(card)
-    .then((result: any) => {
-      console.log(result);
+    .then((createdCardId: CardId) => {
+      console.log(createdCardId);
+      dispatch(storeCreatedCardId(createdCardId));
     })
     .catch((error: any) => {
       console.error("Error creating card: ", error);

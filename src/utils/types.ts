@@ -32,6 +32,7 @@ export interface Platform {
 
 export interface AccountsState {
   items: Account[];
+  createdCardId: CardId;
 }
 
 export interface AppState {
