@@ -1,6 +1,6 @@
 import "firebase/auth";
 import { COLLECTIONS, db } from "../config/firebase";
-import { Card } from "./types";
+import { Card, CardId } from "./types";
 
 const api = {
   createCard: async (card: Card) => {
@@ -11,6 +11,18 @@ const api = {
       return doc.id;
     } catch (error) {
       console.log(error);
+    }
+  },
+  fetchCard: async (cardId: CardId) => {
+    try {
+      const doc = await db.collection(COLLECTIONS.CARDS).doc(cardId).get();
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        return { message: "No such document!" };
+      }
+    } catch (error) {
+      return { message: "Error fetching!" };
     }
   },
 };
