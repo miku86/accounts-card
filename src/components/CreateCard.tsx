@@ -71,8 +71,7 @@ export const CreateCard = ({
 
     if (accountsToShow && accountsToShow.length) {
       const card = {
-        cardId: "1",
-        userId: "1",
+        userId: "anonymous",
         accounts: accountsToShow,
       };
 
