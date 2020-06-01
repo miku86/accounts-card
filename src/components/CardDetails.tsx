@@ -11,7 +11,6 @@ import CopyButton from "./CopyButton";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: "100vh",
-    backgroundColor: "#EEE",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -46,7 +45,7 @@ const CardDetails = ({ fetchCard, fetchedCard, error }: Props) => {
   const createIcon = (platform: string) => createElement(findIcon(platform));
 
   return (
-    <div className={classes.root}>
+    <>
       <List className={classes.list}>
         {error ? (
           <ListItem className={classes.listItem}>
@@ -66,7 +65,7 @@ const CardDetails = ({ fetchCard, fetchedCard, error }: Props) => {
           </ListItem>
         )}
       </List>
-    </div>
+    </>
   );
 };
 
