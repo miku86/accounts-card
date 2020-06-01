@@ -4,7 +4,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -13,13 +12,12 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { FileCopy } from "@material-ui/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import React, { useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createCard, toggleAccountVisibility } from "../state/accountsSlice";
 import { Account, AppState, CardId, Name } from "../utils/types";
+import CopyButton from "./CopyButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
@@ -81,6 +79,8 @@ export const CreateCard = ({
     }
   };
 
+  const createdUrl = `https://accounts-card.netlify.app/${createdCardId}`;
+
   return (
     <>
       {isSuccess ? (
@@ -93,15 +93,9 @@ export const CreateCard = ({
           <DialogContent className={classes.content}>
             <Alert severity="success">
               <AlertTitle>Success</AlertTitle>
-              <div>{`https://accounts-card.netlify.app/${createdCardId}`}</div>
+              <div>{createdUrl}</div>
             </Alert>
-            <CopyToClipboard
-              text={`https://accounts-card.netlify.app/${createdCardId}`}
-            >
-              <IconButton aria-label="copy">
-                <FileCopy />
-              </IconButton>
-            </CopyToClipboard>
+            <CopyButton text={createdUrl} />
           </DialogContent>
           <DialogActions />
         </Dialog>

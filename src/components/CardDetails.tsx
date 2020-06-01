@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { findIcon } from "../config/platforms";
 import { fetchCard } from "../state/accountsSlice";
 import { Account, AppState, Card, CardId, Error } from "../utils/types";
+import CopyButton from "./CopyButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -52,10 +53,11 @@ const CardDetails = ({ fetchCard, fetchedCard, error }: Props) => {
             <ListItemText primary={error} />
           </ListItem>
         ) : fetchedCard && fetchedCard.accounts ? (
-          fetchedCard.accounts.map((account: Account) => (
+          fetchedCard.accounts.map(({ name, url }: Account) => (
             <ListItem className={classes.listItem}>
-              <ListItemIcon>{createIcon(account.name)}</ListItemIcon>
-              <ListItemText primary={account.url} secondary={account.name} />
+              <ListItemIcon>{createIcon(name)}</ListItemIcon>
+              <ListItemText primary={url} secondary={name} />
+              <CopyButton text={url} />
             </ListItem>
           ))
         ) : (
