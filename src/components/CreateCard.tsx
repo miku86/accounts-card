@@ -111,21 +111,14 @@ export const CreateCard = ({
           <DialogContent>
             <List className={classes.list} dense={true}>
               {accounts && accounts.length ? (
-                accounts.map((account: Account) => (
-                  <ListItem
-                    key={account.id}
-                    className={classes.listItem}
-                    dense={true}
-                  >
-                    <ListItemText
-                      primary={account.name}
-                      secondary={account.url}
-                    />
+                accounts.map(({ id, name, url, showInCard }: Account) => (
+                  <ListItem key={id} className={classes.listItem} dense={true}>
+                    <ListItemText primary={name} secondary={url} />
                     <Switch
-                      checked={account.showInCard}
+                      checked={showInCard}
                       onChange={handleChange}
                       color="primary"
-                      name={account.id}
+                      name={id}
                       inputProps={{ "aria-label": "primary checkbox" }}
                     />
                   </ListItem>
