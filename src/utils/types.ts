@@ -9,9 +9,9 @@ export type Placeholder = string;
 export type HTMLId = string;
 export type Id = string;
 export type ShowInCard = boolean;
+export type Message = string;
 
 export interface Card {
-  cardId: CardId;
   userId?: UserId;
   accounts: Account[] | undefined;
 }
@@ -30,9 +30,15 @@ export interface Platform {
   id?: HTMLId;
 }
 
+export interface Error {
+  message: Message;
+}
+
 export interface AccountsState {
   items: Account[];
   createdCardId: CardId;
+  fetchedCard: Card;
+  error: Message | null;
 }
 
 export interface AppState {

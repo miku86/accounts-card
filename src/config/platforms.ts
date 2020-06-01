@@ -5,6 +5,7 @@ import {
   Instagram,
   LinkedIn,
   Mail,
+  Person,
   Pinterest,
   Reddit,
   Telegram,
@@ -15,12 +16,17 @@ import { Platform, Text } from "../utils/types";
 
 const platforms = [
   {
+    placeholder: "Max",
+    text: "Name",
+    icon: Person,
+  },
+  {
     placeholder: "https://",
     text: "Homepage",
     icon: Home,
   },
   {
-    placeholder: "sandy@super.com",
+    placeholder: "max@super.com",
     text: "E-Mail",
     icon: Mail,
   },
@@ -107,6 +113,12 @@ const addIdToPlatforms = (platforms: Platform[]) =>
     ...platform,
     id: generateId(platform.text),
   }));
+
+export const findIcon = (text: string) => {
+  return platforms
+    .filter((platform) => platform.text === text)
+    .map((platform) => platform.icon)[0];
+};
 
 export const getPlatforms = () =>
   addIdToPlatforms(getPlatformsWithIcon(platforms));

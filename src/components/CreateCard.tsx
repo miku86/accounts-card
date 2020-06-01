@@ -4,7 +4,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -13,13 +12,12 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { FileCopy } from "@material-ui/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import React, { useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { createCard, toggleAccountVisibility } from "../state/accountsSlice";
 import { Account, AppState, CardId, Name } from "../utils/types";
+import CopyButton from "./CopyButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
@@ -71,8 +69,7 @@ export const CreateCard = ({
 
     if (accountsToShow && accountsToShow.length) {
       const card = {
-        cardId: "1",
-        userId: "1",
+        userId: "anonymous",
         accounts: accountsToShow,
       };
 
@@ -81,6 +78,8 @@ export const CreateCard = ({
       setIsSuccess(true);
     }
   };
+
+  const createdUrl = `https://accounts-card.netlify.app/${createdCardId}`;
 
   return (
     <>
@@ -94,15 +93,9 @@ export const CreateCard = ({
           <DialogContent className={classes.content}>
             <Alert severity="success">
               <AlertTitle>Success</AlertTitle>
-              <div>{`https://accounts-card.netlify.app/${createdCardId}`}</div>
+              <div>{createdUrl}</div>
             </Alert>
-            <CopyToClipboard
-              text={`https://accounts-card.netlify.app/${createdCardId}`}
-            >
-              <IconButton aria-label="copy">
-                <FileCopy />
-              </IconButton>
-            </CopyToClipboard>
+            <CopyButton text={createdUrl} />
           </DialogContent>
           <DialogActions />
         </Dialog>
@@ -118,21 +111,14 @@ export const CreateCard = ({
           <DialogContent>
             <List className={classes.list} dense={true}>
               {accounts && accounts.length ? (
-                accounts.map((account: Account) => (
-                  <ListItem
-                    key={account.id}
-                    className={classes.listItem}
-                    dense={true}
-                  >
-                    <ListItemText
-                      primary={account.name}
-                      secondary={account.url}
-                    />
+                accounts.map(({ id, name, url, showInCard }: Account) => (
+                  <ListItem key={id} className={classes.listItem} dense={true}>
+                    <ListItemText primary={name} secondary={url} />
                     <Switch
-                      checked={account.showInCard}
+                      checked={showInCard}
                       onChange={handleChange}
                       color="primary"
-                      name={account.id}
+                      name={id}
                       inputProps={{ "aria-label": "primary checkbox" }}
                     />
                   </ListItem>

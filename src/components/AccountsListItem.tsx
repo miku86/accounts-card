@@ -23,14 +23,16 @@ interface Props {
 export const AccountsListItem = ({ platform, handleChange }: Props) => {
   const classes = useStyles();
 
+  const { icon, id, text, placeholder } = platform;
+
   return (
     <ListItem className={classes.listItem}>
-      <ListItemIcon>{createElement(platform.icon)}</ListItemIcon>
+      <ListItemIcon>{createElement(icon)}</ListItemIcon>
       <TextField
-        id={platform.id}
-        label={platform.text}
-        name={platform.text}
-        placeholder={platform.placeholder}
+        id={id}
+        label={text}
+        name={text}
+        placeholder={placeholder}
         variant="filled"
         size="small"
         onChange={handleChange}
