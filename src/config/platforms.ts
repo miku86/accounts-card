@@ -114,5 +114,11 @@ const addIdToPlatforms = (platforms: Platform[]) =>
     id: generateId(platform.text),
   }));
 
+export const findIcon = (text: string) => {
+  return platforms
+    .filter((platform) => platform.text === text)
+    .map((platform) => platform.icon)[0];
+};
+
 export const getPlatforms = () =>
   addIdToPlatforms(getPlatformsWithIcon(platforms));
