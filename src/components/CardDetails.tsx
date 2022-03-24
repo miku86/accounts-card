@@ -5,7 +5,14 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { findIcon } from "../config/platforms";
 import { fetchCard } from "../state/accountsSlice";
-import { Account, AppState, Card, CardId, Error } from "../utils/types";
+import {
+  Account,
+  AppState,
+  Card,
+  CardDetailsParams,
+  CardId,
+  Error
+} from "../utils/types";
 import CopyButton from "./CopyButton";
 
 const useStyles = makeStyles((theme: Theme) => ({
