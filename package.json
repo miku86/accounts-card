@@ -17,7 +17,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "7.1.9",
     "@types/react-router-dom": "5.1.7",
-    "eslint-plugin-jest-dom": "3.2.2",
+    "eslint-plugin-jest-dom": "4.0.1",
     "eslint-plugin-jsx-a11y": "6.3.1",
     "eslint-plugin-testing-library": "3.10.0",
     "fake-indexeddb": "3.1.2",
