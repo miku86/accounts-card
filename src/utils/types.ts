@@ -44,3 +44,7 @@ export interface AccountsState {
 export interface AppState {
   accounts: AccountsState;
 }
+
+export type CardDetailsParams = {
+  id: string;
+};

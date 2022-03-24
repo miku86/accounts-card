@@ -36,7 +36,7 @@ interface Props {
 
 const CardDetails = ({ fetchCard, fetchedCard, error }: Props) => {
   const classes = useStyles();
-  let { id: cardId } = useParams();
+  const { id: cardId } = useParams<CardDetailsParams>();
 
   useEffect(() => {
     fetchCard(cardId);
