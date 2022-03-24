@@ -1,7 +1,7 @@
-import * as firebase from "firebase/app";
-import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore/lite";
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
   databaseURL: process.env.REACT_APP_DATABASEURL,
@@ -12,11 +12,10 @@ export const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
+const app = initializeApp(firebaseConfig);
+
 export const COLLECTIONS = {
   CARDS: "cards",
 };
 
-firebase.initializeApp(firebaseConfig);
-export const db = firebase.firestore();
-
-export default firebase;
+export const db = getFirestore(app);

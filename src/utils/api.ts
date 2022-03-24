@@ -1,5 +1,6 @@
 import "firebase/auth";
-import { COLLECTIONS, db } from "../config/firebase";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore/lite";
+import { db } from "../config/firebase";
 import { Card, CardId } from "./types";
 
 const api = {
@@ -7,7 +8,7 @@ const api = {
     if (card.accounts && card.accounts.length === 0) return;
 
     try {
-      const doc = await db.collection(COLLECTIONS.CARDS).add(card);
+      const doc = await addDoc(collection(db, "users"), card);
       return doc.id;
     } catch (error) {
       console.log(error);
@@ -15,9 +16,11 @@ const api = {
   },
   fetchCard: async (cardId: CardId) => {
     try {
-      const doc = await db.collection(COLLECTIONS.CARDS).doc(cardId).get();
-      if (doc.exists) {
-        return doc.data();
+      const docRef = doc(db, "users", cardId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        return docSnap.data();
       } else {
         return { message: "No such document!" };
       }
